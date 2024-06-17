@@ -44,15 +44,21 @@ export default class Multiselect extends Controller {
   async searchRemote() {
     if (this.searchTarget.value === "") return
 
-    const response = await fetch(this.searchUrlValue + "?" + new URLSearchParams({
-      q: this.searchTarget.value,
-      preselects: this.selectedValue.map(x => x.value).join(",")
-    }))
+    const response = await fetch(this.remoteSearchUrl())
 
     const searchedItems = await response.json()
 
     this.itemsValue = searchedItems
     this.dropdownTarget.classList.add("multiselect__dropdown--open")
+  }
+
+  remoteSearchUrl() {
+    const params = new URLSearchParams({
+      q: this.searchTarget.value,
+      preselects: this.selectedValue.map(x => x.value).join(",")
+    });
+    const separator = this.searchUrlValue.includes('?') ? '&' : '?';
+    return this.searchUrlValue + separator + params.toString();
   }
 
   searchLocal() {
@@ -336,7 +342,7 @@ export default class Multiselect extends Controller {
   }
 
   get inputTemplate() {
-      return `
+    return `
         <input type="text" class="multiselect__search" placeholder="${this.element.dataset.placeholder}"
                data-multiselect-target="search" ${this.disabledValue === true ? 'disabled' : ''}
                data-action="multiselect#search keydown->multiselect#onKeyDown">
@@ -372,7 +378,7 @@ export default class Multiselect extends Controller {
     return `
       <li>
         <label>
-          <input type="checkbox" ${ selected } data-value="${item.value}" data-text="${item.text}"
+          <input type="checkbox" ${selected} data-value="${item.value}" data-text="${item.text}"
           data-action="multiselect#checkBoxChange" data-multiselect-target="item" tabindex="-1">
           <span>${item.text}</span>
         </label>
