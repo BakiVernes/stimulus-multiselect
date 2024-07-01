@@ -1,6 +1,6 @@
 {
   "name": "stimulus-multiselect",
-  "version": "3.0.2",
+  "version": "1.2.0",
   "description": "Multiselect component built on the back of stimulus and html select tag",
   "type": "module",
   "main": "src/multiselect.js",
@@ -32,10 +32,16 @@
     "http-server": "^14.0.0",
     "start-server-and-test": "^1.14.0"
   },
+  "jest": {
+    "transform": { "^.+\\.jsx?$": "babel-jest" },
+    "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"],
+    "testEnvironment": "jsdom"
+  },
   "scripts": {
     "start": "http-server ./examples -p 3300",
     "cy:run": "cypress run",
     "test": "start-server-and-test start http://localhost:3300 cy:run",
+    "tdd": "jest --watchAll",
     "postversion": "git push && git push --tags",
     "release": "yarn test && yarn version && npm adduser && npm publish"
   }
