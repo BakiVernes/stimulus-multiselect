@@ -17,12 +17,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/BakiVernes/stimulus-multiselect"
+    "url": "https://github.com/WizardComputer/stimulus-multiselect"
   },
   "bugs": {
-    "url": "https://github.com/BakiVernes/stimulus-multiselect/issues"
+    "url": "https://github.com/WizardComputer/stimulus-multiselect/issues"
   },
-  "homepage": "https://github.com/BakiVernes/stimulus-multiselect",
+  "homepage": "https://github.com/WizardComputer/stimulus-multiselect",
   "peerDependencies": {
     "@hotwired/stimulus": "^3.1.0"
   },
